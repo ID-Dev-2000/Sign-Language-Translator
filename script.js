@@ -33,6 +33,7 @@ function stringToArray() {
 function arrayToImage() {
     let arrayOfUserData = stringToArray()
     aSLImageDiv.innerHTML = ''
+    receivedUserText.value = ''
 
     // Converts array to string, regex to handle space, set back to array
     // Handles spaces in output sentence
