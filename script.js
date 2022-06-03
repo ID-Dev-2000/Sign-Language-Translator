@@ -11,6 +11,7 @@ userResetButton.addEventListener("click", clearAll)
 // On-enterpress Event Listener
 receivedUserText.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
+        event.preventDefault()
         arrayToImage()
     }
 })
@@ -18,6 +19,7 @@ receivedUserText.addEventListener("keydown", function(event) {
 // Clears input field and displayed translation
 function clearAll() {
     receivedUserText.value = ''
+    receivedUserText.innerHTML = ''
     aSLImageDiv.innerHTML = ''
 }
 
@@ -31,22 +33,28 @@ function stringToArray() {
 
 // Takes array conversion, assigns each letter to image, displays image in DOM
 function arrayToImage() {
-    let arrayOfUserData = stringToArray()
-    aSLImageDiv.innerHTML = ''
-    receivedUserText.value = ''
+    // Prevents previous entry from being displayed if textarea field is empty
+    if (!receivedUserText.value == '') {
+        let arrayOfUserData = stringToArray()
+        aSLImageDiv.innerHTML = ''
+        receivedUserText.value = ''
 
-    // Converts array to string, regex to handle space, set back to array
-    // Handles spaces in output sentence
-    for (i=0; i<arrayOfUserData.length; i++) {
+        // Converts array to string, regex to handle space, set back to array
+        // Handles spaces in output sentence
+        for (i=0; i<arrayOfUserData.length; i++) {
             stringOfUserData = arrayOfUserData.toString()
             cleanStringOfUserDataWithCommas = stringOfUserData.replace(/[\s]/g, '1')
             cleanStringOfUserDataFinal = cleanStringOfUserDataWithCommas.replace(/,/g, '')
             cleanArrayOfUserData = cleanStringOfUserDataFinal.split('')
-    }
+        }
+
         for (let [key, value] of Object.entries(cleanArrayOfUserData)) {
             let stringArrayData = `IMAGES/ASL-${value.toUpperCase()}.PNG`
             let imageFromArrayData = document.createElement('img')
             imageFromArrayData.src = stringArrayData
             aSLImageDiv.appendChild(imageFromArrayData)
+        }
+    } else {
+        return
     }
 }
