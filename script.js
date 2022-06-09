@@ -39,7 +39,7 @@ function arrayToImage() {
         aSLImageDiv.innerHTML = ''
         receivedUserText.value = ''
 
-        // Converts array to string, regex to handle space, set back to array
+        // Converts array to string, regex to handle space values, set back to array
         // Handles spaces in output sentence
         for (i=0; i<arrayOfUserData.length; i++) {
             stringOfUserData = arrayOfUserData.toString()
