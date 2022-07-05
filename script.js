@@ -24,7 +24,6 @@ function clearAll() {
 }
 
 // Use regex to generate clean string, then split string to array
-// must remove whitespace from received text here
 function stringToArray() {
     let userTextValue = receivedUserText.value
     let cleanString = /[^a-zA-Z ]/g
