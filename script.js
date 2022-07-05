@@ -24,10 +24,13 @@ function clearAll() {
 }
 
 // Use regex to generate clean string, then split string to array
+// must remove whitespace from received text here
 function stringToArray() {
     let userTextValue = receivedUserText.value
     let cleanString = /[^a-zA-Z ]/g
     userTextValue = userTextValue.replace(cleanString,'') // removes all non alphabetic characters
+    userTextValue = userTextValue.replace(/\s+/g, ' ').trim() // cleans repeated whitespace characters
+    console.log(userTextValue)
     return userTextValue.split('')
 }
 
@@ -48,7 +51,7 @@ function arrayToImage() {
             cleanArrayOfUserData = cleanStringOfUserDataFinal.split('')
         }
 
-        for (let [key, value] of Object.entries(cleanArrayOfUserData)) {
+        for (let [key, value] of Object.entries(cleanArrayOfUserData)) { // Not yet comfortable with this loop method
             let stringArrayData = `IMAGES/ASL-${value.toUpperCase()}.PNG`
             let imageFromArrayData = document.createElement('img')
             imageFromArrayData.src = stringArrayData
